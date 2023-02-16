@@ -1,0 +1,32 @@
+{%extends 'base.html' %} 
+
+{%block header%}
+    {% include 'header.html' %}
+{%endblock%}
+
+
+{% block content%}
+<div class="px-1 py-1 bg-gray-100 rounded-sm"> 
+    <h3 class="text-3xl text-gray-900" >{{listing.title}} </h3> 
+    <p class= "text-gray-600 text-sm"> Seller: {{listing.user.first_name}} | Contact</p>
+    <div></div>
+    <p class="text-gray-900">Price: {{listing.price}}$</p> 
+    <p class="text-gray-600 text-sm"> Address: {{listing.address}} </p>
+    <p class= "text-gray-600 text-sm"> Num of bedrooms: {{listing.num_bedrooms}} </p>
+    <p class= "text-gray-600 text-sm"> Num of bathrooms: {{listing.num_bathrooms}} </p>
+    <img class="property_image" src="{{listing.property_image.url}}" width="1000", height="1000"></img>
+
+    {%if request.user == listing.user%}
+        <p> You are the owner of this property </p> 
+        <a href= "/listings/single/{{listing.id}}/update" class="text-blue-500"> 
+            Update 
+        </a> 
+        <a href= "/listings/single/{{listing.id}}/delete" class="text-blue-500"> 
+            Delete  
+        </a> 
+    {%endif%}
+</div> 
+{%endblock%} 
+
+
+ 

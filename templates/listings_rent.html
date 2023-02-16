@@ -1,0 +1,21 @@
+{% extends "base.html"%} 
+
+{% block header %} 
+    {% include "header.html" %}
+{%endblock%} 
+
+{%block content%} 
+
+{% for rent in rents %} 
+<div class="px-1 py-1 bg-gray-100 rounded-sm"> 
+    <h3 class="text-3xl text-gray-900" > {{rent.title}} </h3> 
+    <img class="property_image" src="{{rent.property_image.url}}" width="1000", height="1000"></img>
+    
+    <a href= "/rent/single/{{rent.id}}/" class="text-blue-500"> 
+        View Details  
+    </a> 
+</div> 
+{% endfor %} 
+{%endblock%}  
+
+

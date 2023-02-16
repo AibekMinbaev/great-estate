@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+{% block header%} 
+    {% include "header.html" %} 
+{% endblock %} 
+ 
+{% block content%}     
+<div class="px-1 py-1 bg-gray-100 rounded-sm"> 
+    <h3 class="text-3xl text-gray-900" >{{rent.title}} </h3> 
+    <p class="text-gray-900">Price: {{rent.price}}$</p> 
+    <p class="text-gray-600 text-sm"> Address: {{rent.address}} </p>
+    <p class= "text-gray-600 text-sm"> Num of bedrooms: {{rent.num_bedrooms}} </p>
+    <p class= "text-gray-600 text-sm"> Num of bathrooms: {{rent.num_bathrooms}} </p>
+    <img class="property_image" src="{{rent.property_image.url}}" width="1000", height="1000"></img>
+{% endblock %} 
+    
+
+

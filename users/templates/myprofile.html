@@ -1,0 +1,58 @@
+{%extends 'base.html'%} 
+
+{%block header%} 
+    {%include 'header.html'%} 
+{%endblock%} 
+
+{%block content %}
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+
+<br>
+<div class="row">
+	<div class="col-md-3">
+		<div class="card card-body">    
+			<hr>
+			<h3 style="text-align: center">My Profile</h3>
+			<hr>
+		</div>
+	</div>
+
+	<div class="col-md-9">
+		<div class="content-section">
+				<div class="media">
+				  <img class="circle" src=" {{user.my_profile.profile_pic.url}}" width="300" height="300"></img> 
+				  <div class="media-body">
+					<h2 class="account-heading">Name: {{user.first_name}}</h2>
+					<h2 class="account-heading">Last_Name: {{user.last_name}} </h2>
+					<h2 class="account-heading">Email: {{user.email}}</h2>
+					<h2 class="account-heading">Age: {{profile.age}}</h2>
+					<h2 class="account-heading">Phone: {{profile.phone_number}}</h2>
+					<a href='edit/' class='text-blue-500'> 
+						Update 
+					</a>   
+				  </div>            
+			</div>
+		</div>
+	</div>
+</div>	
+
+<style>
+	.circle {
+	  border-radius: 50%;
+	  width: 300px;
+	  height: 300px;
+	  overflow: hidden;
+	  display: inline-block;
+	}
+  </style>
+
+{%endblock%}  
+
+

@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+<head>
+	<link rel="stylesheet" type="text/css" href="messages_page.css">
+</head>
+
+{%block header%} 
+    {% include 'header.html' %} 
+{% endblock %}
+
+{%block content%}
+{% for message in messages %} 
+<div class="px-1 py-1 bg-gray-100 rounded-sm"> 
+    <h3 class="text-3xl text-gray-900" > {{message.inquiry_title}} </h3> 
+    <a href= "/staff/message/{{message.id}}/" class="text-blue-500"> 
+        View Details  
+    </a> 
+</div> 
+{% endfor %} 		
+{%endblock%} 

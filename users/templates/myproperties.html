@@ -1,0 +1,31 @@
+{%extends 'base.html'%} 
+
+{%block header%} 
+    {%include 'header.html'%}
+{%endblock%} 
+
+
+{%block content%}  
+    <h1> Your properties </h1>
+        {%for listing in listings%} 
+            <div class="px-1 py-1 bg-gray-100 rounded-sm"> 
+                <h3 class="text-3xl text-gray-900" > {{listing.title}} </h3> 
+                {% comment %} <img class="property_image" src="{{listing.property_image.url}}" width="1000", height="1000"></img> {% endcomment %}
+                <a href= "/listings/single/{{listing.id}}/" class="text-blue-500"> 
+                    View Details  
+                </a> 
+            </div> 
+        {%endfor%}
+
+    <h2> Want to sell your property ? Create your property listing</h2>     
+    <a href= "/listings/create/" class="text-blue-500"> 
+        Create 
+    </a> 
+    
+    <h2> Want to rent out your property ? Create your property listing</h2>     
+    
+    <a href= "/listings/create/" class="text-blue-500"> 
+        Create 
+    </a> 
+{%endblock%}
+        
