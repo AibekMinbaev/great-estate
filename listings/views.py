@@ -3,6 +3,9 @@ from .models import Listing, Listing_rent
 from .forms import ListingForm 
 from django.contrib.auth.decorators import login_required
 from users.decorators import allowed_users 
+from .filters import BuyFilter
+from django.core.paginator import Paginator 
+
 
 # Create your views here.
 # CGUD - create, read, update, delete and list(will show all the elements) 
@@ -10,9 +13,25 @@ from users.decorators import allowed_users
 
 
 def listing_list(request): # this function will list out all elements in listing database 
+    #filter_data = request.session.get('filter_data')
+    #print(filter_data) # working until here. How to give this data as a initial data for the BuyFilter? ?  
+
     listings = Listing.objects.all() # list of all objects 
-    context = { "listings" : listings}
+    
+    buy_filter = BuyFilter(request.GET, queryset=listings) # django_filter is no a form, it is a class object ??    
+    
+    listings = buy_filter.qs
+    
+    p = Paginator(listings, 2) 
+    page = request.GET.get('page') 
+    listing_list = p.get_page(page) 
+    
+    context = { "listings" : listings, 'buy_filter': buy_filter, 'listing_list': listing_list}
     return render(request, "listings.html", context)  
+
+
+
+
 
 
 def listing_retrieve(request, pk): # this function will list a signle element by id 

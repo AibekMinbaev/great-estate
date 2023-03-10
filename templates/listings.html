@@ -5,13 +5,45 @@
 {%endblock%}
 
 {%block content%}
-{% for listing in listings %} 
+<hr>
+<br><br> 
+<div class="card card-body">
+    <form method="get"> 
+        {{buy_filter.form}}
+    <button class="btn btn-primary" type="submit"> 
+        Search</button> 
+    </form> 
+</div> 
+<hr><br><br> 
+
+{% for listing in listing_list %} 
 <div class="px-1 py-1 bg-gray-100 rounded-sm"> 
     <h3 class="text-3xl text-gray-900" > {{listing.title}} </h3> 
     <img class="property_image" src="{{listing.property_image.url}}" width="1000", height="1000"></img>
     <a href= "/listings/single/{{listing.id}}/" class="text-blue-500"> 
         View Details  
-    </a> 
+    </a>  
 </div> 
 {% endfor %} 
+<hr>
+{% comment %} {{listing_list}}<br/>
+Has previous: {{listing_list.has_previous}}<br/>
+Current Page: {{listing_list.number}} <br/>
+Number of  Pages: {{listing_list.paginator.num_pages}} <br/>
+Has next: {{listing_list.has_next}}<br/> {% endcomment %}
+
+{%if listing_list.has_previous%} 
+    <a href='?page=1'> &laquo First|</a>  
+    <a href="?page={{listing_list.previous_page_number}}">Previous| </a>  
+{%endif%} 
+
+Page {{listing_list.number}} of {{listing_list.paginator.num_pages}} 
+
+{%if listing_list.has_next%} 
+    <a href='?page={{listing_list.next_page_number}}'>|Next</a>  
+    <a href="?page={{listing_list.paginator.num_pages}}"> |Last &raquo </a>  
+{%endif%}
+
+
+
 {%endblock%} 
