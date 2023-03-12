@@ -12,4 +12,4 @@ env/
 db.sqlite3
 
 helper.py 
-static  
+static

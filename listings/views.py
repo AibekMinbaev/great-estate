@@ -10,6 +10,59 @@ from django.core.paginator import Paginator
 # Create your views here.
 # CGUD - create, read, update, delete and list(will show all the elements) 
 
+state_dict = {
+    'AL': 'Alabama',
+    'AK': 'Alaska',
+    'AZ': 'Arizona',
+    'AR': 'Arkansas',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DE': 'Delaware',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'HI': 'Hawaii',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'IA': 'Iowa',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'ME': 'Maine',
+    'MD': 'Maryland',
+    'MA': 'Massachusetts',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MS': 'Mississippi',
+    'MO': 'Missouri',
+    'MT': 'Montana',
+    'NE': 'Nebraska',
+    'NV': 'Nevada',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NY': 'New York',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PA': 'Pennsylvania',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TN': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VT': 'Vermont',
+    'VA': 'Virginia',
+    'WA': 'Washington',
+    'WV': 'West Virginia',
+    'WI': 'Wisconsin',
+    'WY': 'Wyoming'
+}
+
 
 
 def listing_list(request): # this function will list out all elements in listing database 
@@ -30,13 +83,13 @@ def listing_list(request): # this function will list out all elements in listing
     return render(request, "listings.html", context)  
 
 
-
-
-
-
 def listing_retrieve(request, pk): # this function will list a signle element by id 
     listing = Listing.objects.get(id=pk) 
-    context = { "listing" : listing}  
+    if listing.state != None: 
+        state = state_dict[listing.state]
+    else: 
+        state = "No State"
+    context = { "listing" : listing, "state": state}  
     return render(request, "listing.html", context) 
 
 
@@ -49,6 +102,7 @@ def listing_create(request):  # function to create a new listing and add to data
             property = form.save() 
             property.user = request.user 
             property.save() 
+            data = form.cleaned_data 
             return redirect("/listings/all/")
     context = {"form" : form} 
     return render(request, "listing_create.html", context) 
@@ -83,10 +137,5 @@ def listing_rent(request, pk):
     rent = Listing_rent.objects.get(pk=pk) 
     context = {"rent": rent} 
     return render(request, "listing_rent.html", context) 
-
-
-
-
-
 
 
